@@ -1,0 +1,130 @@
+version: "3.8"
+
+services:
+  # Nginx Proxy
+  nginx:
+    container_name: blog-nginx
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./.docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./Backend:/var/www/html
+    depends_on:
+      - backend
+      - frontend
+
+  # Backend (Laravel)
+  backend:
+    container_name: blog-backend
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./Backend:/var/www/html
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=blog_db
+      - DB_USERNAME=blog_user
+      - DB_PASSWORD=blog_password
+      - REDIS_HOST=redis
+      - CACHE_DRIVER=redis
+      - SESSION_DRIVER=redis
+      - QUEUE_CONNECTION=redis
+
+  # Queue Worker
+  queue:
+    container_name: blog-queue
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    entrypoint: ["sh", "/var/www/html/wait-for-mysql.sh"]
+    volumes:
+      - ./Backend:/var/www/html
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_DATABASE=blog_db
+      - DB_USERNAME=blog_user
+      - DB_PASSWORD=blog_password
+      - REDIS_HOST=redis
+      - CACHE_DRIVER=redis
+      - QUEUE_CONNECTION=redis
+    depends_on:
+      - backend
+      - mysql
+      - redis
+
+  # Scheduler
+  scheduler:
+    container_name: blog-scheduler
+    build:
+      context: ./Backend
+      dockerfile: Dockerfile
+    command: sh -c "while true; do php artisan schedule:run --verbose --no-interaction; sleep 60; done"
+    volumes:
+      - ./Backend:/var/www/html
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=mysql
+      - DB_DATABASE=blog_db
+      - DB_USERNAME=blog_user
+      - DB_PASSWORD=blog_password
+      - REDIS_HOST=redis
+      - CACHE_DRIVER=redis
+      - QUEUE_CONNECTION=redis
+    depends_on:
+      - backend
+
+  # Frontend (React)
+  frontend:
+    container_name: blog-frontend
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=/api
+        - VITE_STORAGE_URL=/storage
+    environment:
+      - VITE_API_URL=/api
+      - VITE_STORAGE_URL=/storage
+
+  # MySQL
+  mysql:
+    container_name: blog-mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: blog_db
+      MYSQL_USER: blog_user
+      MYSQL_PASSWORD: blog_password
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "33061:3306"
+
+  # Redis
+  redis:
+    container_name: blog-redis
+    image: redis:alpine
+    volumes:
+      - redis_data:/data
+
+  # phpMyAdmin
+  phpmyadmin:
+    container_name: blog-phpmyadmin
+    image: phpmyadmin:latest
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: password
+    depends_on:
+      - mysql
+
+volumes:
+  mysql_data:
+  redis_data:
