@@ -3,7 +3,13 @@ set -e
 
 echo "Waiting for MySQL..."
 
-# Wait for MySQL using PHP (uses Laravel's env properly)
+# Install composer dependencies if vendor folder is missing
+if [ ! -d "/var/www/html/vendor" ]; then
+    echo "Installing composer dependencies..."
+    composer install --optimize-autoloader --no-interaction
+fi
+
+# Wait for MySQL using PHP
 until php -r "
 \$host = getenv('DB_HOST') ?: 'mysql';
 \$port = getenv('DB_PORT') ?: '3306';

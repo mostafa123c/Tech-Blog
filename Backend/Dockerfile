@@ -21,16 +21,13 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
-COPY . .
-RUN chmod +x /var/www/html/wait-for-mysql.sh
+# Copy entrypoint and helper scripts
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+COPY wait-for-mysql.sh /usr/local/bin/wait-for-mysql.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh /usr/local/bin/wait-for-mysql.sh
 
-# Install dependencies
+# Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER=1
-RUN composer install --optimize-autoloader --no-interaction --no-scripts
-
-# Permissions
-RUN chown -R www-data:www-data storage bootstrap/cache \
-    && chmod -R 775 storage bootstrap/cache
 
 EXPOSE 9000
-CMD ["php-fpm"]
+ENTRYPOINT ["docker-entrypoint.sh"]
