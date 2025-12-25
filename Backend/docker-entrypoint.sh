@@ -17,13 +17,12 @@ mkdir -p /var/www/html/bootstrap/cache
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Create storage link if not exists
 if [ ! -L "/var/www/html/public/storage" ]; then
     php artisan storage:link 2>/dev/null || true
 fi
 
-# Generate app key if not set
 php artisan key:generate --force 2>/dev/null || true
+php artisan jwt:secret --force 2>/dev/null || true
 
 echo "Starting PHP-FPM..."
 exec php-fpm
