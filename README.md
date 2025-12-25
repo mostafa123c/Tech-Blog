@@ -67,8 +67,8 @@ A modern, full-stack Blog Application built with **Laravel 12** (Backend API) an
 
 ## 🛠️ Tech Stack
 
-| Layer                | Technology                  |
-| -------------------- | --------------------------- |
+| Layer                      | Technology                  |
+| -------------------------- | --------------------------- |
 | **Backend**          | Laravel 12, PHP 8.2         |
 | **Frontend**         | React 19, Vite, CSS Modules |
 | **Database**         | MySQL 8.0                   |
@@ -83,7 +83,7 @@ A modern, full-stack Blog Application built with **Laravel 12** (Backend API) an
 
 ### Prerequisites
 
-- [Docker Desktop](https://www.docker.com/products/docker-desktop) installed and running
+- Docker installed and running
 - Git
 
 ### Step 1: Clone the Repository
@@ -148,8 +148,8 @@ This creates the database tables and populates them with demo data:
 
 ### Step 5: Access the Application
 
-| Service        | URL                                            |
-| -------------- | ---------------------------------------------- |
+| Service              | URL                                         |
+| -------------------- | ------------------------------------------- |
 | **Frontend**   | [http://localhost](http://localhost)           |
 | **API**        | [http://localhost/api](http://localhost/api)   |
 | **phpMyAdmin** | [http://localhost:8080](http://localhost:8080) |
@@ -268,13 +268,6 @@ php artisan schedule:work
 
 ## 📸 Screenshots
 
-> **Note:** Add your application screenshots in a `screenshots/` folder and update the paths below.
-
-### 🔐 Authentication Pages
-
-<details>
-<summary>Click to view Auth Screenshots</summary>
-
 #### Login Page
 
 ![Login Page](screenshots/login.png)
@@ -313,8 +306,8 @@ Full API documentation is available in [API_DOCUMENTATION.md](./API_DOCUMENTATIO
 
 ### Quick API Overview
 
-| Endpoint                   | Method | Description        |
-| -------------------------- | ------ | ------------------ |
+| Endpoint                     | Method | Description        |
+| ---------------------------- | ------ | ------------------ |
 | `/api/register`            | POST   | Register new user  |
 | `/api/login`               | POST   | User login         |
 | `/api/logout`              | POST   | User logout        |
