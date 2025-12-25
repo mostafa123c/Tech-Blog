@@ -89,7 +89,7 @@ A modern, full-stack Blog Application built with **Laravel 12** (Backend API) an
 ### Step 1: Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/mostafa123c/Tech-Blog.git
 cd Tech-Blog
 ```
 
