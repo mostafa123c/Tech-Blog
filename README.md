@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://img.shields.io/badge/Laravel-12-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel">
-  <img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
   <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
   <img src="https://img.shields.io/badge/Docker-Ready-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
   <img src="https://img.shields.io/badge/Redis-Alpine-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="Redis">
@@ -16,7 +16,7 @@ A modern, full-stack Blog Application built with **Laravel 12** (Backend API) an
 
 - [Features](#-features)
 - [Tech Stack](#️-tech-stack)
-- [Installation (Docker)](#-installation-docker-recommended)
+- [Installation (Docker)](#-installation-docker)
 - [Installation (Manual)](#-installation-manual)
 - [Screenshots](#-screenshots)
 - [API Documentation](#-api-documentation)
@@ -79,7 +79,7 @@ A modern, full-stack Blog Application built with **Laravel 12** (Backend API) an
 
 ---
 
-## 🐳 Installation (Docker) - Recommended
+## 🐳 Installation (Docker)
 
 ### Prerequisites
 
