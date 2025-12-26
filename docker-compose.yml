@@ -63,7 +63,12 @@ services:
     build:
       context: ./Backend
       dockerfile: Dockerfile
-    command: sh -c "while true; do php artisan schedule:run --verbose --no-interaction; sleep 60; done"
+    command:
+      [
+        "sh",
+        "-c",
+        "while true; do php artisan schedule:run --verbose --no-interaction; sleep 60; done",
+      ]
     volumes:
       - ./Backend:/var/www/html
     environment:
