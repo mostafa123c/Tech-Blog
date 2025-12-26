@@ -16,7 +16,7 @@ A modern, full-stack Blog Application built with **Laravel 12** (Backend API) an
 
 - [Features](#-features)
 - [Tech Stack](#️-tech-stack)
-- [Installation (Docker)](#-installation-docker-recommended)
+- [Installation (Docker)](#-installation-docker)
 - [Installation (Manual)](#-installation-manual)
 - [Screenshots](#-screenshots)
 - [API Documentation](#-api-documentation)
@@ -79,7 +79,7 @@ A modern, full-stack Blog Application built with **Laravel 12** (Backend API) an
 
 ---
 
-## 🐳 Installation (Docker) - Recommended
+## 🐳 Installation (Docker)
 
 ### Prerequisites
 
