@@ -6,15 +6,12 @@ use App\Jobs\DeleteExpiredPostsJob;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Queue;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class ExpiredPostsTest extends TestCase
 {
-    use RefreshDatabase;
-
     #[Test]
     public function delete_expired_posts_job_removes_expired_posts(): void
     {

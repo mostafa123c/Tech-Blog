@@ -6,14 +6,11 @@ use App\Models\Comment;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
 class CommentTest extends TestCase
 {
-    use RefreshDatabase;
-
     private User $user;
     private string $token;
     private Post $post;
