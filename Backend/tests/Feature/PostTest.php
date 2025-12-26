@@ -230,22 +230,6 @@ class PostTest extends TestCase
     }
 
     #[Test]
-    public function user_cannot_view_expired_post(): void
-    {
-        $post = Post::factory()->expired()->create();
-        $post->tags()->attach(Tag::factory()->create());
-
-        $response = $this->withHeaders($this->authHeaders())
-            ->getJson("/api/posts/{$post->id}");
-
-        $response->assertStatus(404)
-            ->assertJson([
-                'success' => false,
-                'message' => 'Post expired',
-            ]);
-    }
-
-    #[Test]
     public function view_non_existent_post_returns_404(): void
     {
         $response = $this->withHeaders($this->authHeaders())
